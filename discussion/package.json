@@ -1,0 +1,14 @@
+{
+  "name": "student-doubt-discussion-platform",
+  "version": "1.0.0",
+  "description": "A platform for students to ask questions and get help from teachers and peers",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 5173",
+    "build": "echo 'Build completed - static files are ready for deployment'"
+  },
+  "keywords": ["education", "discussion", "students", "teachers"],
+  "author": "",
+  "license": "ISC"
+}

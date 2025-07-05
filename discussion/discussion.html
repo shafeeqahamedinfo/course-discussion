@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Platform</title>
+    <meta name="description" content="A platform for students to ask questions and get help from teachers and peers">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-icon">
+                <i data-lucide=""></i>
+                <div class="spinner"></div>
+            </div>
+            <h2>Loading Annamalai University</h2>
+            <p>Connecting to the global discussion board...</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <i data-lucide="book-open"></i>
+                    <h1>Annamalai University</h1>
+                </div>
+                <div class="header-status">
+                    <div id="connection-status" class="connection-status">
+                        <div class="status-indicator online"></div>
+                        <span>Live</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Error Message -->
+            <div id="error-message" class="error-message hidden">
+                <div class="error-content">
+                    <i data-lucide="alert-circle"></i>
+                    <p id="error-text"></p>
+                </div>
+                <button id="error-dismiss" class="error-dismiss">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="success-message hidden">
+                <div class="success-content">
+                    <i data-lucide="check-circle"></i>
+                    <p id="success-text"></p>
+                </div>
+                <button id="success-dismiss" class="success-dismiss">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    
+                    <h1>Global Discussion Board</h1>
+                    <p>Connect with students and teachers worldwide - Ask questions, share knowledge, and learn together</p>
+                   
+                </div>
+                <button id="ask-question-btn" class="btn-primary">
+                    Ask Question
+                </button>
+            </div>
+
+            <!-- Post Form -->
+            <div id="post-form" class="post-form hidden">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <h2>Ask a Question</h2>
+                </div>
+
+                <form id="question-form">
+                    <!-- Author Information -->
+                    <div class="author-section">
+                        <h3>
+                            <i data-lucide="user"></i>
+                            <span>Your Information</span>
+                        </h3>
+                        
+                        <div class="author-grid">
+                            <div class="form-group">
+                                <label for="author-name">Your Name</label>
+                                <input type="text" id="author-name" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>I am a</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="author-type" value="student" checked>
+                                        <div class="radio-content">
+                                            <i data-lucide="graduation-cap"></i>
+                                            <span>Student</span>
+                                        </div>
+                                    </label>
+                                    
+                                    <label class="radio-label">
+                                        <input type="radio" name="author-type" value="teacher">
+                                        <div class="radio-content">
+                                            <i data-lucide="book-open"></i>
+                                            <span>Teacher</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question Details -->
+                    <div class="form-group">
+                        <label for="question-title">Question Title</label>
+                        <input type="text" id="question-title" placeholder="What would you like to know?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="question-subject">Subject</label>
+                        <select id="question-subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                            <option value="Geography">Geography</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Psychology">Psychology</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="question-description">Description</label>
+                        <textarea id="question-description" placeholder="Provide more details about your question..." rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-question" class="btn-submit">
+                        <i data-lucide="send"></i>
+                        <span>Post Question</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <div class="search-input">
+                    <i data-lucide="search"></i>
+                    <input type="text" icon="search" id="search-input" placeholder="Search discussions...">
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-select">
+                        <i data-lucide="filter"></i>
+                        <select id="subject-filter">
+                            <option value="">All subjects</option>
+                        </select>
+                    </div>
+                    
+                    <button id="refresh-btn" class="btn-refresh">
+                        <i data-lucide="refresh-cw"></i>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Posts Grid -->
+            <div id="posts-grid" class="posts-grid">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state hidden">
+                <i data-lucide="search"></i>
+                <p>No discussions found</p>
+                <small>Try adjusting your search or filters</small>
+            </div>
+        </main>
+    </div>
+
+    <!-- Post Detail Modal -->
+    <div id="post-detail-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="back-btn" class="back-btn">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Back to discussions</span>
+                </button>
+            </div>
+
+            <div id="post-detail-content">
+                <!-- Post detail content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="supabase.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
